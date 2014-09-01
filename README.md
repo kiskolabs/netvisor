@@ -1,4 +1,5 @@
 # Netvisor
+[![Gem Version](https://badge.fury.io/rb/netvisor.svg)](http://badge.fury.io/rb/netvisor)
 
 TODO: Write a gem description
 

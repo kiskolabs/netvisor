@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   spec.description   = <<-EOF
   This gem is a ruby implementation of the Netvisor invoicing API
 EOF
-  spec.homepage      = "http://rubygems.org/gems/netvisor"
+  spec.homepage      = "https://github.com/Eficode/netvisor"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
