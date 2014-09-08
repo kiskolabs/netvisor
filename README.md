@@ -1,5 +1,7 @@
 # Netvisor
 [![Gem Version](https://badge.fury.io/rb/netvisor.svg)](http://badge.fury.io/rb/netvisor)
+[![Coverage Status](https://coveralls.io/repos/Eficode/netvisor/badge.png)](https://coveralls.io/r/Eficode/netvisor)
+[![Build Status](https://travis-ci.org/Eficode/netvisor.svg?branch=master)](https://travis-ci.org/Eficode/netvisor)
 
 This gem aims to be a complete implementation of the Netvisor API
 
