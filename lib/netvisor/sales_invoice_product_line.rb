@@ -1,4 +1,5 @@
 require 'happymapper'
+require 'netvisor/vat_percentage'
 
 module Netvisor
   class SalesInvoiceProductLine
@@ -17,20 +18,23 @@ module Netvisor
       content :price, String
     end
 
-    class VatPercentage
+    class Dimension
       include HappyMapper
 
-      attribute :vatcode, String
-      content :percentage, Integer
+      element :name, String, :tag => 'DimensionName'
+      element :item, String, :tag => 'DimensionItem'
     end
 
     tag self.name.split('::').last
 
-    has_one :product_id, ProductId, :tag => 'ProductIdentifier'
-    has_one :name, String, :tag => 'ProductName'
-    has_one :unit_price, UnitPrice, :tag => 'ProductUnitPrice'
-    has_one :vat_percentage, VatPercentage, :tag => 'ProductVatPercentage'
-    has_one :quantity, Integer, :tag => 'SalesInvoiceProductlineQuantity'
-    has_one :AccountingAccountSuggestion, Integer, :tag => 'AccountingAccountSuggestion'
+    element :product_id, ProductId, :tag => 'ProductIdentifier'
+    element :name, String, :tag => 'ProductName'
+    element :unit_price, UnitPrice, :tag => 'ProductUnitPrice'
+    element :vat_percentage, VatPercentage, :tag => 'ProductVatPercentage'
+    element :quantity, Integer, :tag => 'SalesInvoiceProductLineQuantity'
+    element :accounting_suggestion, Integer, :tag => 'AccountingAccountSuggestion'
+    element :AccountingAccountSuggestion, Integer, :tag => 'ProductUnitPurchasePrice'
+    element :discount_percentage, Integer, :tag => 'SalesInvoiceProductLineDiscountPercentage'
+    has_many :dimensions, Dimension, :tag => 'Dimension'
   end
 end

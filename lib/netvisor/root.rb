@@ -5,8 +5,8 @@ module Netvisor
   class Root
     include HappyMapper
 
-    tag self.name.split('::').last
-    has_one :sales_invoice, SalesInvoice, :tag => 'SalesInvoice'
+    tag 'root'
+    has_one :sales_invoice, SalesInvoice
 
   end
 end

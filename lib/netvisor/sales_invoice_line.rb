@@ -7,7 +7,13 @@ module Netvisor
 
     tag 'InvoiceLine'
 
-    has_one :product_line, Netvisor::SalesInvoiceProductLine, :tag => 'SalesInvoiceProductLine'
+    class SalesInvoiceCommentLine
+      include HappyMapper
 
+      tag self.name.split('::').last
+      has_one :comment, String, :tag => 'Comment'
+    end
+    has_one :product_line, SalesInvoiceProductLine
+    has_one :comment_line, SalesInvoiceCommentLine
   end
 end

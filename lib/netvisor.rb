@@ -1,9 +1,8 @@
 require "netvisor/version"
-require 'faraday'
-require 'netvisor/root'
+require "netvisor/base"
 
 module Netvisor
-  def self.hi
-    "Hello world!"
+  def self.new(config)
+    Netvisor::Base.new(config)
   end
 end
