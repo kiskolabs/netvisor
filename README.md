@@ -1,7 +1,7 @@
 # Netvisor
 [![Gem Version](https://badge.fury.io/rb/netvisor.svg)](http://badge.fury.io/rb/netvisor)
 
-TODO: Write a gem description
+This gem aims to be a complete implementation of the Netvisor API
 
 ## Installation
 
@@ -21,7 +21,18 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+### Configure
+
+```
+Netvisor.configure do |config|
+  config.host = Netvisor environment host
+  config.sender = Name of sender (defautls to: 'Netvisor gem')
+  config.customer_id = Your customer ID
+  config.partner_id = Your partner ID
+  config.language = language for the API
+  config.organisation_id = Your organisation ID
+  config.customer_key = Customer key
+  config.partner_ke = Partner key
 
 ## Contributing
 
