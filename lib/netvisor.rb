@@ -7,8 +7,8 @@ module Netvisor
     attr_accessor :configuration
   end
 
-  def self.new(config)
-    Netvisor::Base.new(config)
+  def self.new
+    Netvisor::Base.new
   end
 
   def self.configure

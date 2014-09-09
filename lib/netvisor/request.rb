@@ -4,18 +4,9 @@ module Netvisor
   class Request
 
     def send(xml, service, method = nil, id = nil)
-      url = build_url(service, method, id)
-      headers = build_headers(url)
-      root = Netvisor::Root.parse(File.read("example_salesinvoice.xml"))
-      xml = root.to_xml
-      p xml
-
-      new_xml = "<!DOCTYPE salesinvoice SYSTEM \"salesinvoice.dtd\" >" + xml
-      # tell the parsing to actually load the DTD which it doesn't do by default
-      # options = Nokogiri::XML::ParseOptions::DEFAULT_XML | Nokogiri::XML::ParseOptions::DTDLOAD
-      doc = Nokogiri::XML::Document.parse(new_xml)#,nil,nil,options)
+      url = self.class.build_url(service, method, id)
+      headers = self.class.build_headers(url)
       xml.gsub!("<?xml version=\"1.0\"?>", '')
-      p xml
 
       res = Faraday.post(url) do |req|
         req.headers.merge!(headers)
@@ -56,7 +47,7 @@ module Netvisor
         Netvisor.configuration.customer_key || 'EF1E64BD5D7E0301417B7FE1BF059694',
         Netvisor.configuration.partner_key || '6F4C9C0DD3C1C263DAC131ED3AF89A7C'
       ]
-      p timestamp, arr.join('&')
+      p arr.join('&')
       Digest::SHA2.hexdigest(arr.join('&'))
     end
   end
