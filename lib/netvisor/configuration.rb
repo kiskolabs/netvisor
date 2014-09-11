@@ -16,7 +16,6 @@ module Netvisor
       args.first.each_pair do |k, v|
         self[k] = v if members.map {|x| x.intern}.include? k
       end
-      self.sender ||= 'Netvisor gem'
     end
   end
 end

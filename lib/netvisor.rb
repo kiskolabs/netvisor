@@ -16,10 +16,10 @@ module Netvisor
   end
 
   def self.configuration
-    @configuration ||= Configuration.new
+    @configuration ||= Configuration.new(:sender => 'Netvisor gem')
   end
 
   def self.reset
-    @configuration = Configuration.new
+    @configuration = Configuration.new(:sender => 'Netvisor gem')
   end
 end
