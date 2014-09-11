@@ -3,7 +3,7 @@ require 'faraday'
 module Netvisor
   class Request
 
-    def send(xml, service, method = nil, id = nil)
+    def dispatch(xml, service, method = nil, id = nil)
       url = self.class.build_url(service, method, id)
       headers = self.class.build_headers(url)
       xml.gsub!("<?xml version=\"1.0\"?>", '')

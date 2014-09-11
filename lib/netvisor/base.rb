@@ -13,7 +13,7 @@ module Netvisor
       # validate root
       req = Request.new
 
-      req.send(root.to_xml, service, method, id)
+      req.dispatch(root.to_xml, service, method, id)
     end
 
   end
