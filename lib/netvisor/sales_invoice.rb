@@ -173,10 +173,10 @@ module Netvisor
           element :year, Integer
           element :sum, Float
         end
-        
+
         element :overwrite_account_number, Integer, :tag => 'OverrideDefaultSalesAccrualAccountNumber'
         element :accrual_type, String, :tag => 'SalesInvoiceAccrualType'
-        has_many :accrual_vouchers, AccrualVoucher, :tag => 'AccrualVoucherEntry'
+        has_many :accrual_vouchers, AccrualVoucherEntry, :tag => 'AccrualVoucherEntry'
       end
 
       element :invoice_number, String, :tag => 'SalesInvoiceNumber'
