@@ -22,14 +22,16 @@ EOF
 
   spec.required_ruby_version = '>= 1.8.7'
 
-  spec.add_development_dependency "bundler", "~> 1.7"
-  spec.add_development_dependency "rake", "~> 10.0"
-  spec.add_development_dependency "pry", "~> 0.9.12"
+  spec.add_development_dependency 'bundler', '~> 1.7'
+  spec.add_development_dependency 'rake', '~> 10.0'
+  spec.add_development_dependency 'pry', '~> 0.9.12'
   spec.add_development_dependency 'rspec', '~> 3.1.0'
   spec.add_development_dependency 'coveralls'
   spec.add_development_dependency 'rest-client', '~> 1.6.8'
 
-  spec.add_runtime_dependency "faraday", "~> 0.9"
-  spec.add_runtime_dependency "nokogiri-happymapper", "~> 0.5.9"
-  spec.add_runtime_dependency "nokogiri", "~> 1.5.11"
+  spec.add_runtime_dependency 'faraday', '~> 0.9'
+  spec.add_runtime_dependency 'nokogiri-happymapper-deiga', '~> 0.5.10'
+  spec.add_runtime_dependency 'nokogiri', '~> 1.5.11'
+  spec.add_runtime_dependency 'ox'
+  spec.add_runtime_dependency 'activemodel', '~> 3.2.19'
 end
