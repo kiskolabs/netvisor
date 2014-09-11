@@ -1,6 +1,7 @@
 require 'happymapper'
 require 'netvisor/sales_invoice_line'
 require 'netvisor/vat_percentage'
+require 'netvisor/dimension'
 
 module Netvisor
   class SalesInvoice
@@ -91,6 +92,8 @@ module Netvisor
           element :description, String, :tag => 'Description'
           element :account_number, String, :tag => 'AccountNumber'
           element :vat_percentage, VatPercentage, :tag => 'VatPercent'
+          element :skip_accrual, String, :tag => 'SkipAccrual'
+          has_many :dimensions, Dimension, :tag => 'Dimension'
         end
 
         has_many :lines, VoucherLine, :tag => 'VoucherLine'
@@ -146,6 +149,36 @@ module Netvisor
 
       end
 
+      class ChannelFormat
+        include HappyMapper
+
+        attribute :type, String
+        content :format, String
+      end
+
+      class SecondName
+        include HappyMapper
+
+        attribute :type, String
+        content :format, String
+      end
+
+      class InvoiceAccrual
+        include HappyMapper
+
+        class AccrualVoucherEntry
+          include HappyMapper
+
+          element :month, Integer
+          element :year, Integer
+          element :sum, Float
+        end
+        
+        element :overwrite_account_number, Integer, :tag => 'OverrideDefaultSalesAccrualAccountNumber'
+        element :accrual_type, String, :tag => 'SalesInvoiceAccrualType'
+        has_many :accrual_vouchers, AccrualVoucher, :tag => 'AccrualVoucherEntry'
+      end
+
       element :invoice_number, String, :tag => 'SalesInvoiceNumber'
       element :invoice_date, InvoiceDate, :tag => 'SalesInvoiceDate'
       element :invoice_delivery_date, InvoiceDeliveryDate, :tag => 'SalesInvoiceDeliveryDate'
@@ -154,12 +187,12 @@ module Netvisor
       element :seller_id, SellerId, :tag => 'SellerIdentifier'
       element :seller_name, String, :tag => 'SellerName'
       element :type, String, :tag => 'InvoiceType'
+      element :status, InvoiceStatus, :tag => 'SalesInvoiceStatus'
       element :text_before_lines, String, :tag => 'SalesInvoiceFreeTextBeforeLines'
       element :text_after_lines, String, :tag => 'SalesInvoiceFreeTextAfterLines'
       element :our_reference, String, :tag => 'SalesInvoiceOurReference'
       element :your_reference, String, :tag => 'SalesInvoiceYourReference'
       element :comment, String, :tag => 'SalesInvoicePrivateComment'
-      element :status, InvoiceStatus, :tag => 'SalesInvoiceStatus'
 
       element :customer_id, CustomerId, :tag => 'InvoicingCustomerIdentifier'
       element :customer_firstname, String, :tag => 'InvoicingCustomerName'
@@ -169,14 +202,14 @@ module Netvisor
       element :customer_city, String, :tag => 'InvoicingCustomerTown'
       element :customer_country, CountryCode, :tag => 'InvoicingCustomerCountryCode'
 
-      element :delivery_method, String, :tag => 'DeliveryMethod'
-      element :delivery_term, String, :tag => 'DeliveryTerm'
       element :delivery_address_name, String, :tag => 'DeliveryAddressName'
       element :delivery_address_name_extension, String, :tag => 'DeliveryAddressNameExtension'
       element :delivery_address_line, String, :tag => 'DeliveryAddressLine'
       element :delivery_address_postal_code, String, :tag => 'DeliveryAddressPostNumber'
       element :delivery_address_city, String, :tag => 'DeliveryAddressTown'
       element :delivery_address_countrey, CountryCode, :tag => 'DeliveryAddressCountryCode'
+      element :delivery_method, String, :tag => 'DeliveryMethod'
+      element :delivery_term, String, :tag => 'DeliveryTerm'
 
       element :tax_handling_type, String, :tag => 'SalesInvoiceTaxHandlingType'
       element :payment_net_days, Integer, :tag => 'PaymentTermNetDays'
@@ -187,8 +220,12 @@ module Netvisor
       element :overrise_account_number, Integer, :tag => 'OverrideVoucherSalesReceivablesAccountNumber'
       element :subject_type, String, :tag => 'InvoiceSubjectType'
 
+      element :print_channel_format, ChannelFormat, :tag => 'printchannelformat'
+      element :second_name, SecondName, :tag => 'secondname'
+
       has_many :invoice_lines, SalesInvoiceLines, :tag => 'InvoiceLines'
       has_many :voucher_lines, InvoiceVoucherLines, :tag => 'InvoiceVoucherLines'
+      has_many :invoice_accrual, InvoiceAccrual, :tag => 'SalesInvoiceAccrual'
       has_many :attachments, SalesInvoiceAttachments, :tag => 'SalesInvoiceAttachments'
       has_many :custom_tags, CustomTags, :tag => 'CustomTags'
   end

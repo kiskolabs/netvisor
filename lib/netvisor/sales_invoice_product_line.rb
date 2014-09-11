@@ -1,5 +1,6 @@
 require 'happymapper'
 require 'netvisor/vat_percentage'
+require 'netvisor/dimension'
 
 module Netvisor
   class SalesInvoiceProductLine
@@ -15,14 +16,7 @@ module Netvisor
       include HappyMapper
 
       attribute :type, String
-      content :price, String
-    end
-
-    class Dimension
-      include HappyMapper
-
-      element :name, String, :tag => 'DimensionName'
-      element :item, String, :tag => 'DimensionItem'
+      content :price, Float
     end
 
     tag self.name.split('::').last
@@ -30,11 +24,15 @@ module Netvisor
     element :product_id, ProductId, :tag => 'ProductIdentifier'
     element :name, String, :tag => 'ProductName'
     element :unit_price, UnitPrice, :tag => 'ProductUnitPrice'
+    element :unit_purchase_price, UnitPrice, :tag => 'ProductUnitPurchasePrice'
     element :vat_percentage, VatPercentage, :tag => 'ProductVatPercentage'
     element :quantity, Integer, :tag => 'SalesInvoiceProductLineQuantity'
-    element :accounting_suggestion, Integer, :tag => 'AccountingAccountSuggestion'
-    element :AccountingAccountSuggestion, Integer, :tag => 'ProductUnitPurchasePrice'
     element :discount_percentage, Integer, :tag => 'SalesInvoiceProductLineDiscountPercentage'
+    element :free_text, String, :tag => 'SalesInvoiceProductLineFreeText'
+    element :vat_sum, Float, :tag => 'SalesInvoiceProductLineVatSum'
+    element :line_sum, Float, :tag => 'SalesInvoiceProductLineSum'
+    element :accounting_suggestion, Integer, :tag => 'AccountingAccountSuggestion'
+    element :skip_accrual, Integer, :tag => 'SkipAccrual'
     has_many :dimensions, Dimension, :tag => 'Dimension'
   end
 end
