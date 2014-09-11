@@ -32,6 +32,4 @@ EOF
   spec.add_runtime_dependency 'faraday', '~> 0.9'
   spec.add_runtime_dependency 'nokogiri-happymapper-deiga', '~> 0.5.10'
   spec.add_runtime_dependency 'nokogiri', '~> 1.5.11'
-  spec.add_runtime_dependency 'ox'
-  spec.add_runtime_dependency 'activemodel', '~> 3.2.19'
 end
