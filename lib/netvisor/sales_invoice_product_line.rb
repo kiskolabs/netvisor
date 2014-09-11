@@ -1,18 +1,19 @@
 require 'happymapper'
 require 'netvisor/vat_percentage'
 require 'netvisor/dimension'
+require 'netvisor/element_base'
 
 module Netvisor
   class SalesInvoiceProductLine
     include HappyMapper
 
-    class ProductId
+    class ProductId < ElementBase
       include HappyMapper
 
       attribute :type, String
       content :id, String
     end
-    class UnitPrice
+    class UnitPrice < ElementBase
       include HappyMapper
 
       attribute :type, String

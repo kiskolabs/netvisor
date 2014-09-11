@@ -1,7 +1,8 @@
 require 'happymapper'
+require 'netvisor/element_base'
 
 module Netvisor
-  class VatPercentage
+  class VatPercentage < ElementBase
     include HappyMapper
 
     attribute :vatcode, String
