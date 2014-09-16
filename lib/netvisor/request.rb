@@ -7,13 +7,14 @@ module Netvisor
     def dispatch(xml, service, method = nil, id = nil)
       url = self.class.build_url(service, method, id)
       headers = self.class.build_headers(url)
+      Netvisor.logger.debug "dispatch: URL #{url}"
+      Netvisor.logger.debug "dispatch: Headers #{headers}"
       xml.gsub!("<?xml version=\"1.0\"?>", '')
 
       res = Faraday.post(url) do |req|
         req.headers.merge!(headers)
         req.body = xml
       end
-      p res
       Netvisor::Response.parse(res.body)
     end
 
@@ -49,7 +50,7 @@ module Netvisor
         Netvisor.configuration.customer_key,
         Netvisor.configuration.partner_key
       ]
-      p arr.join('&')
+      Netvisor.logger.debug "build_mac: #{arr.join('&')}"
       Digest::SHA2.hexdigest(arr.join('&'))
     end
   end
