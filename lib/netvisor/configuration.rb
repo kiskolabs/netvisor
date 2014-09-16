@@ -7,9 +7,10 @@ module Netvisor
                               :language,
                               :organisation_id,
                               :customer_key,
-                              :partner_key) do
+                              :partner_key,
+                              :log_level) do
 
-    # Initialize override to accept named parameters (Config(:host => 'foo'...))
+    # Initialize override to accept named parameters (Configuration(:host => 'foo'...))
     # http://stackoverflow.com/questions/5407940/named-parameters-in-ruby-structs
     def initialize *args
       return super unless (args.length == 1 and args.first.instance_of? Hash)

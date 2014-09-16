@@ -1,10 +1,11 @@
+require 'logging'
 require "netvisor/version"
 require "netvisor/base"
 require "netvisor/configuration"
 
 module Netvisor
   class << self
-    attr_accessor :configuration
+    attr_accessor :configuration, :logger
   end
 
   def self.new
@@ -16,10 +17,26 @@ module Netvisor
   end
 
   def self.configuration
-    @configuration ||= Configuration.new(:sender => 'Netvisor gem')
+    init_config if (@configuration.nil? || @configuration == 1)
+    @configuration
   end
 
   def self.reset
-    @configuration = Configuration.new(:sender => 'Netvisor gem')
+    init_config
+    init_logger
+  end
+
+  def self.init_logger
+    @logger = Logging.logger(STDOUT)
+    @logger.level = configuration.log_level
+  end
+
+  def self.init_config
+    @configuration = Configuration.new(:sender => 'Netvisor gem', :log_level => :debug)
+  end
+
+  def self.logger
+    init_logger if (@logger.nil? || @logger == 1)
+    @logger
   end
 end
