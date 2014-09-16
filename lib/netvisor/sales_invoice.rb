@@ -10,57 +10,65 @@ module Netvisor
 
       tag self.name.split('::').last
 
-      class InvoiceDate < ElementBase
+      class InvoiceDate
         include HappyMapper
+        include ElementBase
 
         attribute :format, String
         content :value, Date
       end
 
-      class InvoiceAmount < ElementBase
+      class InvoiceAmount
         include HappyMapper
+        include ElementBase
 
         attribute :iso4217currencycode, String
         attribute :currencyrate, Float
         content :amount, Float
       end
 
-      class SellerId < ElementBase
+      class SellerId
         include HappyMapper
+        include ElementBase
 
         attribute :type, String
         content :id, String
       end
 
-      class InvoiceStatus < ElementBase
+      class InvoiceStatus
+        include ElementBase
         include HappyMapper
 
         attribute :type, String
         content :status, String
       end
 
-      class CustomerId < ElementBase
+      class CustomerId
+        include ElementBase
         include HappyMapper
 
         attribute :type, String
         content :id, String
       end
 
-      class CountryCode < ElementBase
+      class CountryCode
+        include ElementBase
         include HappyMapper
 
         attribute :type, String
         content :country_code, String
       end
 
-      class CashDiscount < ElementBase
+      class CashDiscount
+        include ElementBase
         include HappyMapper
 
         attribute :type, String
         content :discount, Integer
       end
 
-      class DirectDebitLink < ElementBase
+      class DirectDebitLink
+        include ElementBase
         include HappyMapper
 
         attribute :mode, String
@@ -70,12 +78,14 @@ module Netvisor
       class InvoiceVoucherLines
         include HappyMapper
 
-        class VoucherLine < ElementBase
+        class VoucherLine
+          include ElementBase
           include HappyMapper
 
           tag 'VoucherLine'
 
-          class LineSum < ElementBase
+          class LineSum
+            include ElementBase
             include HappyMapper
 
             attribute :type, String
@@ -97,7 +107,8 @@ module Netvisor
       class SalesInvoiceAttachments
         include HappyMapper
 
-        class InvoiceAttachment < ElementBase
+        class InvoiceAttachment
+          include ElementBase
           include HappyMapper
 
           tag self.name.split('::').last
@@ -116,10 +127,12 @@ module Netvisor
         include HappyMapper
 
 
-        class CustomTag < ElementBase
+        class CustomTag
+          include ElementBase
           include HappyMapper
 
-          class TagValue < ElementBase
+          class TagValue
+            include ElementBase
             include HappyMapper
 
             attribute :datatype, String
@@ -143,14 +156,16 @@ module Netvisor
 
       end
 
-      class ChannelFormat < ElementBase
+      class ChannelFormat
+        include ElementBase
         include HappyMapper
 
         attribute :type, String
         content :format, String
       end
 
-      class SecondName < ElementBase
+      class SecondName
+        include ElementBase
         include HappyMapper
 
         attribute :type, String
@@ -160,7 +175,8 @@ module Netvisor
       class InvoiceAccrual
         include HappyMapper
 
-        class AccrualVoucherEntry < ElementBase
+        class AccrualVoucherEntry
+          include ElementBase
           include HappyMapper
 
           element :month, Integer

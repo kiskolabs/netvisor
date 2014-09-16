@@ -7,13 +7,15 @@ module Netvisor
   class SalesInvoiceProductLine
     include HappyMapper
 
-    class ProductId < ElementBase
+    class ProductId
+      include ElementBase
       include HappyMapper
 
       attribute :type, String
       content :id, String
     end
-    class UnitPrice < ElementBase
+    class UnitPrice
+      include ElementBase
       include HappyMapper
 
       attribute :type, String
