@@ -1,5 +1,9 @@
 ## CHANGELOG
 
+## Version 0.9.3
+* Added logging
+* Rewrote configuration
+
 ## Version 0.9.2
 * Changed `ElementBase` from Superclass to Mixin
 
