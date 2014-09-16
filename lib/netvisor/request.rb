@@ -1,4 +1,5 @@
 require 'faraday'
+require 'netvisor/response'
 
 module Netvisor
   class Request
@@ -13,6 +14,7 @@ module Netvisor
         req.body = xml
       end
       p res
+      Netvisor::Response.parse(res.body)
     end
 
     def self.build_url(service, method, id)
