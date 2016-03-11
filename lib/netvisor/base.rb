@@ -7,6 +7,10 @@ module Netvisor
       request(sales_invoice, 'sales_invoice')
     end
 
+    def send_product(product)
+      request(product, 'product')
+    end
+
     def request(data_object, service, method = nil, id = nil)
       root = Root.new
       root.send("#{service}=", data_object)

@@ -7,6 +7,6 @@ module Netvisor
 
     tag 'root'
     has_one :sales_invoice, SalesInvoice
-
+    has_one :product, Product
   end
 end
