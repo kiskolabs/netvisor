@@ -1,5 +1,12 @@
 ## CHANGELOG
 
+## Version 0.9.4
+* Added support for getting product list
+* Added support for creating a product
+* Added support for getting customer
+* Added support for creating a customer
+
+
 ## Version 0.9.3
 * Added logging
 * Rewrote configuration
