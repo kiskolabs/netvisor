@@ -11,6 +11,18 @@ module Netvisor
       request(product, 'product')
     end
 
+    def send_customer(customer)
+      request(customer, "customer")
+    end
+
+    def get_customer(customer_id)
+      request(nil, "getcustomer", :get, customer_id)
+    end
+
+    def get_products
+      request(nil, "productlist", :get, nil)
+    end
+
     def request(data_object, service, method = nil, id = nil)
       req = Request.new
       if data_object
