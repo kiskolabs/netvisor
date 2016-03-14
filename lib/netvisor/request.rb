@@ -5,21 +5,25 @@ module Netvisor
   class Request
 
     def dispatch(xml, service, method = nil, id = nil)
+      method ||= :post
       url = self.class.build_url(service, method, id)
       headers = self.class.build_headers(url)
+
       Netvisor.logger.debug "dispatch: URL #{url}"
       Netvisor.logger.debug "dispatch: Headers #{headers}"
-      xml.gsub!("<?xml version=\"1.0\"?>", '')
-
-      res = Faraday.post(url) do |req|
+      xml.gsub!("<?xml version=\"1.0\"?>", '') if xml
+      res = Faraday.send(method || :post, url) do |req|
         req.headers.merge!(headers)
-        req.body = xml
+        req.body = xml if xml
       end
+
       Netvisor::Response.parse(res.body)
     end
 
     def self.build_url(service, method, id)
       url = "#{Netvisor.configuration.host}/#{service.gsub(/_/,'')}.nv"
+      url << "?id=#{id}" if id
+      url
     end
 
     def self.build_headers(url)
