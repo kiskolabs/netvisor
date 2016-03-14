@@ -1,5 +1,6 @@
 require 'happymapper'
 require 'netvisor/sales_invoice'
+require 'netvisor/product'
 
 module Netvisor
   class Root
