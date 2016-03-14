@@ -12,12 +12,15 @@ module Netvisor
     end
 
     def request(data_object, service, method = nil, id = nil)
-      root = Root.new
-      root.send("#{service}=", data_object)
-      # validate root
       req = Request.new
+      if data_object
+        root = Root.new
+        root.send("#{service}=", data_object)
 
-      req.dispatch(root.to_xml, service, method, id)
+        req.dispatch(root.to_xml, service, method, id)
+      else
+        req.dispatch(nil, service, method, id)
+      end
     end
 
   end
