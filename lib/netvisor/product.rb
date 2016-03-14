@@ -1,5 +1,6 @@
 require 'happymapper'
 require 'netvisor/vat_percentage'
+require 'netvisor/unit_price'
 require 'netvisor/element_base'
 
 module Netvisor
@@ -7,14 +8,6 @@ module Netvisor
     include HappyMapper
 
     tag self.name.split('::').last
-
-    class UnitPrice
-      include ElementBase
-      include HappyMapper
-
-      attribute :type, String # net or gross
-      content :price, Float
-    end
 
     class BookkeepingDetails
       include HappyMapper

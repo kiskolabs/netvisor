@@ -1,6 +1,7 @@
 require 'happymapper'
 require 'netvisor/sales_invoice_line'
 require 'netvisor/vat_percentage'
+require 'netvisor/country_code'
 require 'netvisor/dimension'
 require 'netvisor/element_base'
 
@@ -49,14 +50,6 @@ module Netvisor
 
         attribute :type, String
         content :id, String
-      end
-
-      class CountryCode
-        include ElementBase
-        include HappyMapper
-
-        attribute :type, String
-        content :country_code, String
       end
 
       class CashDiscount

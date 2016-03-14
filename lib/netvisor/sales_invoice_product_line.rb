@@ -1,5 +1,6 @@
 require 'happymapper'
 require 'netvisor/vat_percentage'
+require 'netvisor/unit_price'
 require 'netvisor/dimension'
 require 'netvisor/element_base'
 
@@ -13,13 +14,6 @@ module Netvisor
 
       attribute :type, String
       content :id, String
-    end
-    class UnitPrice
-      include ElementBase
-      include HappyMapper
-
-      attribute :type, String
-      content :price, Float
     end
 
     tag self.name.split('::').last
