@@ -18,6 +18,7 @@ module Netvisor
 
     class BookkeepingDetails
       include HappyMapper
+      include ElementBase
 
       element :vat_percentage, VatPercentage, :tag => 'defaultvatpercentage'
     end
@@ -42,6 +43,6 @@ module Netvisor
       has_one :bookkeeping_details, BookkeepingDetails, :tag => 'productbookkeepingdetails'
     end
 
-    element :base_info, BaseInfo, :tag => 'productbaseinformation'
+    has_one :base_info, BaseInfo, :tag => 'productbaseinformation'
   end
 end
