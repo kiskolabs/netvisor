@@ -12,7 +12,7 @@ module Netvisor
       Netvisor.logger.debug "dispatch: URL #{url}"
       Netvisor.logger.debug "dispatch: Headers #{headers}"
       xml.gsub!("<?xml version=\"1.0\"?>", '') if xml
-      res = Faraday.send(method || :post, url) do |req|
+      res = Faraday.send(method, url) do |req|
         req.headers.merge!(headers)
         req.body = xml if xml
       end
