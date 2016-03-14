@@ -19,7 +19,7 @@ module Netvisor
     class BookkeepingDetails
       include HappyMapper
 
-      element :vat_percentage, VatPercent, :tag => 'defaultvatpercentage'
+      element :vat_percentage, VatPercentage, :tag => 'defaultvatpercentage'
     end
 
     class BaseInfo
