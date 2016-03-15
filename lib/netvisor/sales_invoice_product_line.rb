@@ -7,6 +7,7 @@ require 'netvisor/element_base'
 module Netvisor
   class SalesInvoiceProductLine
     include HappyMapper
+    include ElementBase
 
     class ProductId
       include ElementBase
