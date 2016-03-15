@@ -8,6 +8,7 @@ require 'netvisor/element_base'
 module Netvisor
   class SalesInvoice
     include HappyMapper
+    include ElementBase
 
       tag self.name.split('::').last
 
