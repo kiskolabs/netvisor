@@ -11,7 +11,7 @@ module Netvisor
       include HappyMapper
       include ElementBase
 
-      element :netvisor_key, String, :tag => 'NetvisorKey'
+      element :netvisor_key, Integer, :tag => 'NetvisorKey'
       element :internal_identifier, String, :tag => 'InternalIdentifier'
       element :external_identifier, String, :tag => 'ExternalIdentifier'
       element :customer_group_netvisor_key, String, :tag => 'CustomerGroupNetvisorKey'
