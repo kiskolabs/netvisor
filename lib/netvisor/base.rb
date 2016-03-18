@@ -15,6 +15,10 @@ module Netvisor
       request(customer, "customer", :post, "Add")
     end
 
+    def get_customers
+      request(nil, "customerlist", :get)
+    end
+
     def get_customer(customer_id)
       request(nil, "getcustomer", :get, nil, customer_id)
     end

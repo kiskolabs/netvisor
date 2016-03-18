@@ -21,6 +21,24 @@ module Netvisor
       element :inserted_data_identifier, Integer, :tag => 'InsertedDataIdentifier'
     end
 
+    class ResponseCustomerList
+      include HappyMapper
+
+      class Customer
+        include HappyMapper
+
+        tag self.name.split('::').last
+
+        element :netvisor_key,            Integer, :tag => 'Netvisorkey'
+        element :name,                    String, :tag => 'Name'
+        element :code,                    String, :tag => 'Code'
+        element :organisation_identifier, String, :tag => 'OrganisationIdentifier'
+        element :uri,                     String, :tag => 'Uri'
+      end
+
+      has_many :customers, Customer
+    end
+
     class ResponseProductList
       include HappyMapper
 
@@ -36,7 +54,6 @@ module Netvisor
         element :uri,           String, :tag => 'Uri'
       end
 
-      tag self.name.split('::').last
       has_many :products, Product, :tag => 'Product'
     end
 
@@ -46,5 +63,6 @@ module Netvisor
     element :status,        ResponseStatus
     element :product_list,  ResponseProductList, :tag => 'ProductList'
     element :customer,      Customer, :tag => 'Customer'
+    element :customer_list, ResponseCustomerList, :tag => 'Customerlist'
   end
 end
