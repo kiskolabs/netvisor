@@ -4,15 +4,14 @@ require 'netvisor/response'
 module Netvisor
   class Request
 
-    def dispatch(xml, service, method = nil, id = nil)
-      method ||= :post
+    def dispatch(xml, service, http_method = :post, method = nil, id = nil)
       url = self.class.build_url(service, method, id)
       headers = self.class.build_headers(url)
 
       Netvisor.logger.debug "dispatch: URL #{url}"
       Netvisor.logger.debug "dispatch: Headers #{headers}"
       xml.gsub!("<?xml version=\"1.0\"?>", '') if xml
-      res = Faraday.send(method, url) do |req|
+      res = Faraday.send(http_method, url) do |req|
         req.headers.merge!(headers)
         req.body = xml if xml
       end
@@ -22,7 +21,11 @@ module Netvisor
 
     def self.build_url(service, method, id)
       url = "#{Netvisor.configuration.host}/#{service.gsub(/_/,'')}.nv"
-      url << "?id=#{id}" if id
+      query_hash = { id: id, method: method }.reject { |k,v| v.nil? }
+      if query_hash.any?
+        query = CGI.unescape(URI.encode_www_form(query_hash))
+        url << "?#{query}"
+      end
       url
     end
 
