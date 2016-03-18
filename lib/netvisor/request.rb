@@ -17,7 +17,7 @@ module Netvisor
         req.headers.merge!(headers)
         req.body = xml if xml
       end
-      binding.pry
+
       Netvisor::Response.parse(res.body)
     end
 
