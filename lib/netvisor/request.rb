@@ -4,7 +4,8 @@ require 'netvisor/response'
 module Netvisor
   class Request
 
-    def dispatch(xml, service, http_method = :post, method = nil, id = nil)
+    def dispatch(xml, service, http_method = nil, method = nil, id = nil)
+      http_method ||= :post
       url = self.class.build_url(service, method, id)
       headers = self.class.build_headers(url)
 
