@@ -9,7 +9,7 @@ describe Netvisor do
     end
 
     it "returns a url for foo.bar" do
-      url = Netvisor::Request.build_url('baz', nil, nil)
+      url = Netvisor::Request.build_url('baz', {})
 
       expect(url).to be_a(String)
       expect(url).to eq('http://foo.bar/baz.nv')
