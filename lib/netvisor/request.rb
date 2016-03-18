@@ -4,9 +4,10 @@ require 'netvisor/response'
 module Netvisor
   class Request
 
-    def dispatch(xml, service, http_method = nil, method = nil, id = nil)
+    def dispatch(xml, service, http_method = nil, query = nil)
       http_method ||= :post
-      url = self.class.build_url(service, method, id)
+      query ||= {}
+      url = self.class.build_url(service, query)
       headers = self.class.build_headers(url)
 
       Netvisor.logger.debug "dispatch: URL #{url}"
@@ -16,16 +17,14 @@ module Netvisor
         req.headers.merge!(headers)
         req.body = xml if xml
       end
-
+      binding.pry
       Netvisor::Response.parse(res.body)
     end
 
-    def self.build_url(service, method, id)
+    def self.build_url(service, query)
       url = "#{Netvisor.configuration.host}/#{service.gsub(/_/,'')}.nv"
-      query_hash = { id: id, method: method }.reject { |k,v| v.nil? }
-      if query_hash.any?
-        query = CGI.unescape(URI.encode_www_form(query_hash))
-        url << "?#{query}"
+      if query.any?
+        url << "?#{CGI.unescape(URI.encode_www_form(query))}"
       end
       url
     end

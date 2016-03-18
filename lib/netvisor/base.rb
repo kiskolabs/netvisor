@@ -12,30 +12,32 @@ module Netvisor
     end
 
     def send_customer(customer)
-      request(customer, "customer", :post, "Add")
+      request(customer, "customer", :post, {method: "Add"})
     end
 
-    def get_customers
-      request(nil, "customerlist", :get)
+    def get_customers(query = nil)
+      # query = { keyword: "ABC123" } Filters result list with given keyword. 
+      # Match is searched from following fields: Name, Customer Code, Organization identifier, CoName
+      request(nil, "customerlist", :get, query)
     end
 
     def get_customer(customer_id)
-      request(nil, "getcustomer", :get, nil, customer_id)
+      request(nil, "getcustomer", :get, {id: customer_id})
     end
 
     def get_products
-      request(nil, "productlist", :get, nil, nil)
+      request(nil, "productlist", :get)
     end
 
-    def request(data_object, service, http_method = nil, method = nil, id = nil)
+    def request(data_object, service, http_method = nil, query = nil)
       req = Request.new
       if data_object
         root = Root.new
         root.send("#{service}=", data_object)
 
-        req.dispatch(root.to_xml, service, http_method, method, id)
+        req.dispatch(root.to_xml, service, http_method, query)
       else
-        req.dispatch(nil, service, http_method, method, id)
+        req.dispatch(nil, service, http_method, query)
       end
     end
 
