@@ -12,7 +12,13 @@ module Netvisor
 
       has_many :statuses, String, :tag => 'Status'
       element :timestamp, DateTime, :tag => 'TimeStamp'
+    end
 
+    class Replies
+      include HappyMapper
+
+      tag self.name.split('::').last
+      element :inserted_data_identifier, Integer, :tag => 'InsertedDataIdentifier'
     end
 
     class ResponseProductList
@@ -36,6 +42,7 @@ module Netvisor
 
     tag 'Root'
 
+    element :replies,       Replies
     element :status,        ResponseStatus
     element :product_list,  ResponseProductList, :tag => 'ProductList'
     element :customer,      Customer, :tag => 'Customer'
