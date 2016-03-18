@@ -8,7 +8,7 @@ module Netvisor
     end
 
     def send_product(product)
-      request(product, 'product', :post,)
+      request(product, 'product')
     end
 
     def send_customer(customer)
@@ -16,11 +16,11 @@ module Netvisor
     end
 
     def get_customer(customer_id)
-      request(nil, "getcustomer", :get, customer_id)
+      request(nil, "getcustomer", :get, nil, customer_id)
     end
 
     def get_products
-      request(nil, "productlist", :get, nil)
+      request(nil, "productlist", :get, nil, nil)
     end
 
     def request(data_object, service, http_method = nil, method = nil, id = nil)
