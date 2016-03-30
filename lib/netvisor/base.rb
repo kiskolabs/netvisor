@@ -3,22 +3,29 @@ require 'netvisor/request'
 
 module Netvisor
   class Base
+    # The 'sales_invoice' is a Netvisor::SalesInvoice object
     def send_invoice(sales_invoice)
       request(sales_invoice, "sales_invoice")
     end
 
+    # The 'product' is a Netvisor::Product object
     def send_product(product)
       request(product, "product", :post, {method: "add"})
     end
 
+    # The 'product' is a Netvisor::Product object
+    # the 'id' is the nexudus id of the product
     def update_product(product, id)
       request(customer, "product", :post, {id: id, method: "edit"})
     end
 
+    # The 'customer' is a Netvisor::Customer object
     def send_customer(customer)
       request(customer, "customer", :post, {method: "add"})
     end
 
+    # The 'customer' is a Netvisor::Customer object
+    # the 'id' is the nexudus id of the customer
     def update_customer(customer, id)
       request(customer, "customer", :post, {id: id, method: "edit"})
     end
