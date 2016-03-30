@@ -25,13 +25,13 @@ module Netvisor
       element :description, String, :tag => 'description'
       element :unit_price, UnitPrice, :tag => 'unitprice'
       element :unit, String, :tag => 'unit'
-      element :unitweight, Integer, :tag => 'unitweight'
-      element :purchaseprice, Integer, :tag => 'purchaseprice'
-      element :tariffheading, String, :tag => 'tariffheading'
-      element :comissionpercentage, Integer, :tag => 'comissionpercentage'
+      element :unit_weight, Integer, :tag => 'unitweight'
+      element :purchase_price, Integer, :tag => 'purchaseprice'
+      element :tariff_heading, String, :tag => 'tariffheading'
+      element :comission_percentage, Integer, :tag => 'comissionpercentage'
       element :is_active, Integer, :tag => 'isactive' # 0=no, 1=yes 
-      element :issalesproduct, Integer, :tag => 'issalesproduct' # 0=no, 1=yes
-      element :inventoryenabled, Integer, :tag => 'inventoryenabled' # 0=no, 1=yes
+      element :is_sales_product, Integer, :tag => 'issalesproduct' # 0=no, 1=yes
+      element :inventory_enabled, Integer, :tag => 'inventoryenabled' # 0=no, 1=yes
 
       has_one :bookkeeping_details, BookkeepingDetails, :tag => 'productbookkeepingdetails'
     end
