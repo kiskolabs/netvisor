@@ -1,9 +1,12 @@
 require 'netvisor/element_base'
+require 'happymapper'
 
-class CountryCode
-  include ElementBase
-  include HappyMapper
+module Netvisor
+  class CountryCode
+    include ElementBase
+    include HappyMapper
 
-  attribute :type, String
-  content :country_code, String
+    attribute :type, String
+    content :country_code, String
+  end
 end
