@@ -4,11 +4,15 @@ require 'netvisor/request'
 module Netvisor
   class Base
     def send_invoice(sales_invoice)
-      request(sales_invoice, 'sales_invoice')
+      request(sales_invoice, "sales_invoice")
     end
 
     def send_product(product)
-      request(product, 'product')
+      request(product, "product", :post, {method: "add"})
+    end
+
+    def update_product(product, id)
+      request(customer, "product", :post, {id: id, method: "edit"})
     end
 
     def send_customer(customer)
