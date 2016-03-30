@@ -1,7 +1,12 @@
-class UnitPrice
-  include ElementBase
-  include HappyMapper
+require 'happymapper'
+require 'netvisor/element_base'
 
-  attribute :type, String # net or gross
-  content :price, Float
+module Netvisor
+  class UnitPrice
+    include ElementBase
+    include HappyMapper
+
+    attribute :type, String # net or gross
+    content :price, Float
+  end
 end
