@@ -31,7 +31,7 @@ module Netvisor
 
     def self.build_headers(url)
       timestamp = DateTime.parse(Time.now.utc.to_s).strftime("%F %T.%L")
-      transaction_id = ((1000...9999).to_a.shuffle.first + Time.now.to_i).to_s
+      transaction_id = (Random.rand(1000..99999) + Time.now.to_i).to_s
       return {
         'X-Netvisor-Authentication-Sender' => Netvisor.configuration.sender,
         'X-Netvisor-Authentication-CustomerId' => Netvisor.configuration.customer_id,
