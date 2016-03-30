@@ -12,7 +12,11 @@ module Netvisor
     end
 
     def send_customer(customer)
-      request(customer, "customer", :post, {method: "Add"})
+      request(customer, "customer", :post, {method: "add"})
+    end
+
+    def update_customer(customer, id)
+      request(customer, "customer", :post, {id: id, method: "edit"})
     end
 
     def get_customers(query = nil)

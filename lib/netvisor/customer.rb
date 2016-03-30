@@ -11,17 +11,15 @@ module Netvisor
       include HappyMapper
       include ElementBase
 
-      element :netvisor_key, Integer, :tag => 'NetvisorKey'
       element :internal_identifier, String, :tag => 'InternalIdentifier'
       element :external_identifier, String, :tag => 'ExternalIdentifier'
-      element :customer_group_netvisor_key, String, :tag => 'CustomerGroupNetvisorKey'
-      element :customer_group_name, String, :tag => 'CustomerGroupName'
       element :name, String, :tag => 'Name'
       element :name_extension, String, :tag => 'NameExtension'
       element :street_address, String, :tag => 'StreetAddress'
       element :city, String, :tag => 'City'
       element :post_number, String, :tag => 'PostNumber'
       element :country_code, CountryCode, :tag => 'Country'
+      element :customer_group_name, String, :tag => 'CustomerGroupName'
       element :phone_number, String, :tag => 'PhoneNumber'
       element :fax_number, String, :tag => 'FaxNumber'
       element :email, String, :tag => 'Email'
