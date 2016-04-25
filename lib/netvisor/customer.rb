@@ -25,6 +25,8 @@ module Netvisor
       element :email, String, :tag => 'Email'
       element :home_page_uri, String, :tag => 'HomePageUri'
       element :is_active, Integer, :tag => 'IsActive'
+      element :is_private, Integer, :tag => 'isprivatecustomer'
+      element :invoicing_email, String, :tag => 'EmailInvoicingAddress'
     end
 
     class FinvoiceDetails
