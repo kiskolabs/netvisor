@@ -199,8 +199,8 @@ module Netvisor
       element :comment, String, :tag => 'SalesInvoicePrivateComment'
 
       element :customer_id, CustomerId, :tag => 'InvoicingCustomerIdentifier'
-      element :customer_firstname, String, :tag => 'InvoicingCustomerName'
-      element :customer_lastname, String, :tag => 'InvoicingCustomerNameExtension'
+      element :customer_lastname, String, :tag => 'InvoicingCustomerName'
+      element :customer_firstname, String, :tag => 'InvoicingCustomerNameExtension'
       element :customer_address, String, :tag => 'InvoicingCustomerAddressLine'
       element :customer_postal_code, String, :tag => 'InvoicingCustomerPostNumber'
       element :customer_city, String, :tag => 'InvoicingCustomerTown'
