@@ -56,16 +56,27 @@ module Netvisor
       element :phone_number, String, :tag => 'ContactPersonPhone'
     end
 
+    class InvoicingLanguage
+      include ElementBase
+      include HappyMapper
+
+      attribute :type, String
+      content :invoicing_language, String
+    end
+
     class AdditionalInformation
       include HappyMapper
       include ElementBase
 
       element :comment, String, :tag => 'Comment'
       element :customer_reference_number, String, :tag => 'CustomerReferenceNumber'
-      element :balance_limit, String, :tag => 'BalanceLimit'
-      element :discount_percentage, String, :tag => 'DiscountPercentage'
-      element :price_group, String, :tag => 'PriceGroup'
-      element :sales_person, String, :tag => 'DefaultSalesPerson'
+      element :directdebitbankaccount, String, :tag => 'directdebitbankaccount'
+      element :invoicing_language, InvoicingLanguage, :tag => 'Invoicinglanguage'
+      # element :reference_number, String, :tag => 'ReferenceNumber'
+      # element :balance_limit, String, :tag => 'BalanceLimit'
+      # element :discount_percentage, String, :tag => 'DiscountPercentage'
+      # element :price_group, String, :tag => 'PriceGroup'
+      # element :sales_person, String, :tag => 'DefaultSalesPerson'
     end
 
     has_one :base_info, BaseInfo, :tag => 'CustomerBaseInformation'
