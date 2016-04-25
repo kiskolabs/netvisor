@@ -69,7 +69,7 @@ module Netvisor
       include ElementBase
 
       element :comment, String, :tag => 'Comment'
-      element :customer_reference_number, String, :tag => 'CustomerReferenceNumber'
+      element :customer_reference_number, String, :tag => 'customerreferencenumber'
       element :directdebitbankaccount, String, :tag => 'directdebitbankaccount'
       element :invoicing_language, InvoicingLanguage, :tag => 'Invoicinglanguage'
       # element :reference_number, String, :tag => 'ReferenceNumber'
