@@ -61,7 +61,7 @@ module Netvisor
       include ElementBase
 
       element :comment, String, :tag => 'Comment'
-      element :reference_number, String, :tag => 'ReferenceNumber'
+      element :customer_reference_number, String, :tag => 'CustomerReferenceNumber'
       element :balance_limit, String, :tag => 'BalanceLimit'
       element :discount_percentage, String, :tag => 'DiscountPercentage'
       element :price_group, String, :tag => 'PriceGroup'
