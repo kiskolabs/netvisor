@@ -46,7 +46,7 @@ module Netvisor
         include HappyMapper
 
         element :identifier, String
-        element :itemdata, SalesInvoice # 	valid SalesInvoice XML
+        has_one :itemdata, SalesInvoice, :tag => 'itemdata' # 	valid SalesInvoice XML
       end
 
       has_many :invoices, Invoice, :tag => 'item'
