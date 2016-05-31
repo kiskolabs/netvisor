@@ -14,7 +14,7 @@ module Netvisor
     end
 
     def send_invoice_batch(batch)
-      request(batch, "salesinvoicebatch", :post)
+      request(batch, "sales_invoice_batch", :post)
     end
 
     # The 'product' is a Netvisor::Product object
