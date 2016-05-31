@@ -13,6 +13,10 @@ module Netvisor
       request(product, "product", :post, {method: "add"})
     end
 
+    def send_invoice_batch(batch)
+      request(batch, "salesinvoicebatch", :post)
+    end
+
     # The 'product' is a Netvisor::Product object
     # the 'id' is the nexudus id of the product
     def update_product(product, id)
@@ -31,7 +35,7 @@ module Netvisor
     end
 
     def get_customers(query = nil)
-      # query = { keyword: "ABC123" } Filters result list with given keyword. 
+      # query = { keyword: "ABC123" } Filters result list with given keyword.
       # Match is searched from following fields: Name, Customer Code, Organization identifier, CoName
       request(nil, "customerlist", :get, query)
     end
