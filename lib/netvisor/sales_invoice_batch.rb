@@ -45,8 +45,15 @@ module Netvisor
         include ElementBase
         include HappyMapper
 
+        class ItemData
+          include ElementBase
+          include HappyMapper
+
+          has_one :sales_invoice, SalesInvoice
+        end
+
         element :identifier, String
-        has_one :itemdata, SalesInvoice, :tag => 'itemdata' # 	valid SalesInvoice XML
+        element :itemdata, ItemData # 	valid SalesInvoice XML
       end
 
       has_many :invoices, Invoice, :tag => 'item'
