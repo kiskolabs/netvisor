@@ -26,7 +26,7 @@ module Netvisor
 
         attribute :iso4217currencycode, String
         attribute :currencyrate, Float
-        content :amount, Float
+        content :amount, String
       end
 
       class SellerId

@@ -7,6 +7,6 @@ module Netvisor
     include HappyMapper
 
     attribute :type, String # net or gross
-    content :price, Float
+    content :price, String
   end
 end
