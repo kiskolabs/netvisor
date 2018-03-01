@@ -1,5 +1,6 @@
 require 'happymapper'
 require 'netvisor/customer'
+require 'netvisor/sales_invoice_line'
 
 module Netvisor
   class Response
@@ -57,6 +58,23 @@ module Netvisor
       has_many :products, Product, :tag => 'Product'
     end
 
+    class SalesInvoice
+      include HappyMapper
+
+      class SalesInvoiceLines
+        include HappyMapper
+        has_many :invoice_lines, SalesInvoiceLine, :tag => 'InvoiceLine'
+      end
+
+      element :sales_invoice_number, String, :tag => 'SalesInvoiceNumber'
+      element :sales_invoice_date, String, :tag => 'SalesInvoiceDate'
+      element :sales_invoice_amount, Float, :tag => 'SalesInvoiceAmount'
+      element :invoice_status, String, :tag => 'InvoiceStatus'
+      element :invoicing_customer_name, String, :tag => 'InvoicingCustomerName'
+      element :invoicing_customer_netvisor_key, String, :tag => 'InvoicingCustomerNetvisorKey'
+      element :invoice_lines, SalesInvoiceLines, :tag => 'InvoiceLines'
+    end
+
     tag 'Root'
 
     element :replies,       Replies
@@ -64,5 +82,6 @@ module Netvisor
     element :product_list,  ResponseProductList, :tag => 'ProductList'
     element :customer,      Customer, :tag => 'Customer'
     element :customer_list, ResponseCustomerList, :tag => 'Customerlist'
+    element :sales_invoice, SalesInvoice, :tag => 'SalesInvoice'
   end
 end

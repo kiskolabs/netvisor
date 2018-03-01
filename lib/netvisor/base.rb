@@ -31,7 +31,7 @@ module Netvisor
     end
 
     def get_customers(query = nil)
-      # query = { keyword: "ABC123" } Filters result list with given keyword. 
+      # query = { keyword: "ABC123" } Filters result list with given keyword.
       # Match is searched from following fields: Name, Customer Code, Organization identifier, CoName
       request(nil, "customerlist", :get, query)
     end
@@ -42,6 +42,10 @@ module Netvisor
 
     def get_products
       request(nil, "productlist", :get)
+    end
+
+    def get_sales_invoice(netvisor_key)
+      request(nil, "getsalesinvoice", :get, { netvisorKey: netvisor_key })
     end
 
     def request(data_object, service, http_method = nil, query = nil)
