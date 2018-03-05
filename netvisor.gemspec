@@ -20,9 +20,9 @@ EOF
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
-  spec.required_ruby_version = '>= 2.2.1'
+  spec.required_ruby_version = '>= 2.3.3'
 
-  spec.add_development_dependency 'bundler', '~> 1.11.2'
+  spec.add_development_dependency 'bundler', '~> 1.16.0'
   spec.add_development_dependency 'rake', '~> 10.4.2'
   spec.add_development_dependency 'pry', '~> 0.10.1'
   spec.add_development_dependency 'rspec', '~> 3.1.0'
@@ -32,6 +32,6 @@ EOF
   spec.add_runtime_dependency 'faraday', '~> 0.9'
   spec.add_runtime_dependency 'system_timer', '~> 1.2.4' if Gem::Version.new(RUBY_VERSION) < Gem::Version.new('1.9')
   spec.add_runtime_dependency 'nokogiri-happymapper', '~> 0.5.9'
-  spec.add_runtime_dependency 'nokogiri', '~> 1.6.4'
+  spec.add_runtime_dependency 'nokogiri', '~> 1.8.2'
   spec.add_runtime_dependency 'logging'
 end
