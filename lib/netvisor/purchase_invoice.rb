@@ -40,7 +40,7 @@ module Netvisor
         element :discountpercentage, Float, :tag => 'discountpercentage'
         element :vatpercent, Integer, :tag => 'vatpercent'
         has_one :linesum, Linesum, :tag => 'linesum'
-        has_one :dimension, Dimension, :tag => 'dimension'
+        has_many :dimensions, Dimension, :tag => 'dimension'
       end
 
       has_many :invoice_lines, PurchaseInvoiceLine, :tag => 'purchaseinvoiceline'
