@@ -8,6 +8,10 @@ module Netvisor
       request(sales_invoice, "sales_invoice")
     end
 
+    def send_purchase_invoice(purchase_invoice)
+      request(purchase_invoice, "purchase_invoice")
+    end
+
     # The 'product' is a Netvisor::Product object
     def send_product(product)
       request(product, "product", :post, {method: "add"})
