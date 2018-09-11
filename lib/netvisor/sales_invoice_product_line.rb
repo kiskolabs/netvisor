@@ -31,6 +31,6 @@ module Netvisor
     element :line_sum, Float, :tag => 'SalesInvoiceProductLineSum'
     element :accounting_suggestion, Integer, :tag => 'AccountingAccountSuggestion'
     element :skip_accrual, Integer, :tag => 'SkipAccrual'
-    has_many :dimensions, Dimension, :tag => 'Dimension'
+    has_many :dimensions, Dimension, :tag => 'dimension'
   end
 end
