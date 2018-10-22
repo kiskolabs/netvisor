@@ -8,6 +8,10 @@ module Netvisor
       request(sales_invoice, "sales_invoice")
     end
 
+    def delete_invoice(invoice_id)
+      request(nil, "deletesalesinvoice", :get, { invoiceid: invoice_id })
+    end
+
     def send_purchase_invoice(purchase_invoice)
       request(purchase_invoice, "purchase_invoice")
     end
