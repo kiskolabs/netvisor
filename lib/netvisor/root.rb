@@ -1,5 +1,6 @@
 require 'happymapper'
 require 'netvisor/sales_invoice'
+require 'netvisor/sales_payment'
 require 'netvisor/purchase_invoice'
 require 'netvisor/product'
 require 'netvisor/customer'
@@ -12,6 +13,7 @@ module Netvisor
     tag 'root'
     has_one :sales_invoice, SalesInvoice
     has_one :purchase_invoice, PurchaseInvoice
+    has_one :sales_payment, SalesPayment
     has_one :product, Product
     has_one :customer, Customer
   end
