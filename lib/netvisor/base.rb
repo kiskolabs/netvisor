@@ -4,8 +4,13 @@ require 'netvisor/request'
 module Netvisor
   class Base
     # The 'sales_invoice' is a Netvisor::SalesInvoice object
-    def send_invoice(sales_invoice)
-      request(sales_invoice, "sales_invoice")
+    def send_invoice(sales_invoice, method=:add, id=nil)
+      case method
+      when :add
+        request(sales_invoice, "sales_invoice")
+      when :edit
+        request(sales_invoice, "sales_invoice", nil, { method: method, id: id })
+      end
     end
 
     def delete_invoice(invoice_id)
