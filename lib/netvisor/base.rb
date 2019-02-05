@@ -4,12 +4,12 @@ require 'netvisor/request'
 module Netvisor
   class Base
     # The 'sales_invoice' is a Netvisor::SalesInvoice object
-    def send_invoice(sales_invoice, method=:add, id=nil)
+    def send_invoice(sales_invoice, method="add", id=nil)
       case method
-      when :add
+      when "add"
         request(sales_invoice, "sales_invoice")
-      when :edit
-        request(sales_invoice, "sales_invoice", nil, { method: method, id: id })
+      when "edit"
+        request(sales_invoice, "sales_invoice", nil, { id: id, method: method }
       end
     end
 
@@ -70,7 +70,6 @@ module Netvisor
       if data_object
         root = Root.new
         root.send("#{service}=", data_object)
-
         req.dispatch(root.to_xml, service, http_method, query)
       else
         req.dispatch(nil, service, http_method, query)
