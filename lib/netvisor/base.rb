@@ -9,7 +9,7 @@ module Netvisor
       when "add"
         request(sales_invoice, "sales_invoice")
       when "edit"
-        request(sales_invoice, "sales_invoice", nil, { id: id, method: method }
+        request(sales_invoice, "sales_invoice", nil, { id: id, method: method })
       end
     end
 
