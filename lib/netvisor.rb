@@ -17,8 +17,8 @@ module Netvisor
   end
 
   def self.configuration
-    init_config if (@configuration.nil? || @configuration == 1)
-    @configuration
+    init_config if (Thread.current[:netvisor_configuration].nil? || Thread.current[:netvisor_configuration] == 1)
+    Thread.current[:netvisor_configuration]
   end
 
   def self.reset
@@ -32,7 +32,7 @@ module Netvisor
   end
 
   def self.init_config
-    @configuration = Configuration.new(:sender => 'Netvisor gem', :log_level => :debug)
+    Thread.current[:netvisor_configuration] = Configuration.new(:sender => 'Netvisor gem', :log_level => :debug)
   end
 
   def self.logger
