@@ -60,6 +60,10 @@ module Netvisor
       request(nil, "getsalesinvoice", :get, { netvisorKey: netvisor_key })
     end
 
+    def get_sales_invoice_list(customer_netvisor_key)
+      request(nil, "salesinvoicelist", :get, { customernetvisorkey: customer_netvisor_key })
+    end
+
     def request(data_object, service, http_method = nil, query = nil)
       req = Request.new
       if data_object
