@@ -16,6 +16,7 @@ module Netvisor
       element :address, String
       element :postcode, String
       element :town, String
+      element :country, String
     end
 
     class DestinationBankAccount
@@ -27,12 +28,14 @@ module Netvisor
       element :destination_bank_account_number, String, :tag => 'destinationbankaccountnumber'
     end
 
-    has_one :recipient, Recipient, :tag => 'recipient'
-    has_one :destination_bank_account, DestinationBankAccount, :tag => 'destinationbankaccount'
-
     element :bank_payment_message_type, String, :tag => 'bankpaymentmessagetype'
     element :bank_payment_message, String, :tag => 'bankpaymentmessage'
-    element :source_bank_account_number, String, :tag => 'sourcebankaccountnumber',
+
+    has_one :recipient, Recipient
+
+    element :source_bank_account_number, String, :tag => 'sourcebankaccountnumber'
+    has_one :destination_bank_account, DestinationBankAccount, :tag => 'destinationbankaccount'
     element :duedate, Date, :tag => 'duedate'
+    element :amount, Float, :tag => 'amount'
   end
 end
