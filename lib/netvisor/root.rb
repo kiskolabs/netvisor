@@ -4,6 +4,7 @@ require 'netvisor/sales_payment'
 require 'netvisor/purchase_invoice'
 require 'netvisor/product'
 require 'netvisor/customer'
+require 'netvisor/payment'
 
 
 module Netvisor
@@ -16,5 +17,6 @@ module Netvisor
     has_one :sales_payment, SalesPayment
     has_one :product, Product
     has_one :customer, Customer
+    has_one :payment, Payment
   end
 end
