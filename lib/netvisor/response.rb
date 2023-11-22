@@ -85,8 +85,8 @@ module Netvisor
 
         element :netvisor_key, String, :tag => 'NetvisorKey'
         element :sales_invoice_number, String, :tag => 'InvoiceNumber'
-        element :sales_invoice_date, InvoiceDate, :tag => 'InvoiceDate'
-        element :sales_invoice_status, InvoiceStatus, :tag => 'InvoiceStatus'
+        element :sales_invoice_date, Date, :tag => 'InvoiceDate'
+        element :sales_invoice_status, String, :tag => 'InvoiceStatus'
         element :customer_code, String, :tag => 'CustomerCode'
         element :customer_name, String, :tag => 'CustomerName'
         element :reference_number, String, :tag => 'ReferenceNumber'
