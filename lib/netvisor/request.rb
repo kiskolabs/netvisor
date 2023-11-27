@@ -18,6 +18,8 @@ module Netvisor
         req.body = xml if xml
       end
 
+      Netvisor.logger.debug("dispatch: Response #{res.body} #{res.status}") if ENV['DEBUG_NETVISOR_RESPONSE']
+
       Netvisor::Response.parse(res.body)
     end
 
