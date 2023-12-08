@@ -60,6 +60,10 @@ module Netvisor
       request(nil, "getsalesinvoice", :get, { netvisorKey: netvisor_key })
     end
 
+    def get_sales_invoice_list(query = nil)
+      request(nil, "salesinvoicelist", :get, query)
+    end
+
     def send_payment(payment)
       request(payment, "payment", :post)
     end
