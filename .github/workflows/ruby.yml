@@ -1,0 +1,21 @@
+name: Ruby CI
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ruby-version: ['2.3.7', '2.4.4', '2.5.1', 'head', 'jruby-19mode']
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.ruby-version }}
+        bundler-cache: true
+    - name: Run bundle install
+      run: |
+        gem install bundler
+        bundle install
