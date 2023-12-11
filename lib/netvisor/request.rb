@@ -10,15 +10,17 @@ module Netvisor
       url = self.class.build_url(service, query)
       headers = self.class.build_headers(url)
 
-      Netvisor.logger.debug "dispatch: URL #{url}"
-      Netvisor.logger.debug "dispatch: Headers #{headers}"
+      request_id = headers['X-Netvisor-Authentication-TransactionId']
+
+      Netvisor.logger.debug "[#{request_id}] dispatch: URL #{url}"
+      Netvisor.logger.debug "[#{request_id}] dispatch: Headers #{headers}"
       xml.gsub!("<?xml version=\"1.0\"?>", '') if xml
       res = Faraday.send(http_method, url) do |req|
         req.headers.merge!(headers)
         req.body = xml if xml
       end
 
-      Netvisor.logger.debug("dispatch: Response #{res.body.inspect} Status: #{res.status.inspect}") if ENV['DEBUG_NETVISOR_RESPONSE']
+      Netvisor.logger.debug("[#{request_id}] dispatch: Response #{res.body.inspect} Status: #{res.status.inspect}") if ENV['DEBUG_NETVISOR_RESPONSE']
 
       Netvisor::Response.parse(res.body)
     end
