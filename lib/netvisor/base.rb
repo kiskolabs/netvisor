@@ -68,6 +68,10 @@ module Netvisor
       request(payment, "payment", :post)
     end
 
+    def update_invoice_status(invoice_id, status)
+      request(nil, "updatesalesinvoicestatus", :post, { netvisorkey: invoice_id, status: status })
+    end
+
     def request(data_object, service, http_method = nil, query = nil)
       req = Request.new
       if data_object
