@@ -1,4 +1,5 @@
-require 'faraday'
+require 'net/http'
+require 'uri'
 require 'netvisor/response'
 
 module Netvisor
@@ -15,14 +16,40 @@ module Netvisor
       Netvisor.logger.debug "[#{request_id}] dispatch: URL #{url}"
       Netvisor.logger.debug "[#{request_id}] dispatch: Headers #{headers}"
       xml.gsub!("<?xml version=\"1.0\"?>", '') if xml
-      res = Faraday.send(http_method, url) do |req|
-        req.headers.merge!(headers)
-        req.body = xml if xml
+
+      uri = URI(url)
+
+      http = Net::HTTP.new(uri.host, uri.port)
+      http.use_ssl = (uri.scheme == 'https')
+
+      request = case http_method.to_s.downcase
+                when 'get'
+                  Net::HTTP::Get.new(uri.request_uri)
+                when 'post'
+                  Net::HTTP::Post.new(uri.request_uri)
+                when 'put'
+                  Net::HTTP::Put.new(uri.request_uri)
+                when 'delete'
+                  Net::HTTP::Delete.new(uri.request_uri)
+                else
+                  raise ArgumentError, "Unsupported HTTP method: #{http_method}"
+                end
+
+      headers.each do |key, value|
+        request[key] = value
       end
 
-      Netvisor.logger.debug("[#{request_id}] dispatch: Response #{res.body.inspect} Status: #{res.status.inspect}") if ENV['DEBUG_NETVISOR_RESPONSE']
+      request.body = xml if xml
 
-      Netvisor::Response.parse(res.body)
+      response = http.request(request)
+
+      unless response.is_a?(Net::HTTPSuccess)
+        raise "Can't connect to Netvisor. Response: #{response.inspect}"
+      end
+
+      Netvisor.logger.debug("[#{request_id}] dispatch: Response #{response.body.inspect} Status: #{response.code.inspect}") if ENV['DEBUG_NETVISOR_RESPONSE']
+
+      Netvisor::Response.parse(response.body)
     end
 
     def self.build_url(service, query)
