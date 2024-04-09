@@ -11,16 +11,13 @@ module Netvisor
       url = self.class.build_url(service, query)
       headers = self.class.build_headers(url)
 
-      request_id = headers['X-Netvisor-Authentication-TransactionId']
-
-      Netvisor.logger.debug "[#{request_id}] dispatch: URL #{url}"
-      Netvisor.logger.debug "[#{request_id}] dispatch: Headers #{headers}"
       xml.gsub!("<?xml version=\"1.0\"?>", '') if xml
 
       uri = URI(url)
 
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = (uri.scheme == 'https')
+      http.set_debug_output($stdout) if ENV['DEBUG_NETVISOR_RESPONSE']
 
       request = case http_method.to_s.downcase
                 when 'get'
@@ -46,8 +43,6 @@ module Netvisor
       unless response.is_a?(Net::HTTPSuccess)
         raise "Can't connect to Netvisor. Response: #{response.inspect}"
       end
-
-      Netvisor.logger.debug("[#{request_id}] dispatch: Response #{response.body.inspect} Status: #{response.code.inspect}") if ENV['DEBUG_NETVISOR_RESPONSE']
 
       Netvisor::Response.parse(response.body)
     end
