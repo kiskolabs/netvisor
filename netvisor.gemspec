@@ -22,12 +22,12 @@ EOF
 
   spec.required_ruby_version = '>= 2.3.3'
 
-  spec.add_development_dependency 'bundler', '~> 1.17.3'
-  spec.add_development_dependency 'rake', '~> 10.4.2'
-  spec.add_development_dependency 'pry', '~> 0.10.1'
-  spec.add_development_dependency 'rspec', '~> 3.1.0'
-  spec.add_development_dependency 'coveralls'
-  spec.add_development_dependency 'rest-client', '>= 1.8.0'
+  spec.add_development_dependency "bundler", "~> 2.5.0"
+  spec.add_development_dependency "rake", "~> 10.4.2"
+  spec.add_development_dependency "pry", "~> 0.10.1"
+  spec.add_development_dependency "rspec", "~> 3.1.0"
+  spec.add_development_dependency "coveralls"
+  spec.add_development_dependency "rest-client", ">= 1.8.0"
 
   spec.add_runtime_dependency 'system_timer', '~> 1.2.4' if Gem::Version.new(RUBY_VERSION) < Gem::Version.new('1.9')
   spec.add_runtime_dependency 'nokogiri-happymapper', '~> 0.5.9'
