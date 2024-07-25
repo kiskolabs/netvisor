@@ -25,8 +25,9 @@ EOF
   spec.add_development_dependency "bundler", "~> 2.5.0"
   spec.add_development_dependency "rake", "~> 13.0.0"
   spec.add_development_dependency "pry", "~> 0.10.1"
-  spec.add_development_dependency "rspec", "~> 3.1.0"
-  spec.add_development_dependency "coveralls"
+  spec.add_development_dependency "rspec", "~> 3.13.0"
+  spec.add_development_dependency "coveralls", "~> 0.8.23"
+  spec.add_development_dependency "json", "~> 2.7.2"
   spec.add_development_dependency "rest-client", ">= 1.8.0"
 
   spec.add_runtime_dependency 'system_timer', '~> 1.2.4' if Gem::Version.new(RUBY_VERSION) < Gem::Version.new('1.9')
