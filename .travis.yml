@@ -2,8 +2,7 @@ language: ruby
 cache: bundler
 before_install: gem install bundler
 rvm:
-- ruby-head
-- 2.5.1
-- 2.4.4
-- 2.3.7
-- jruby-19mode
+  - ruby-head
+  - 3.1.6
+  - 3.3.4
+  - jruby
