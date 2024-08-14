@@ -185,8 +185,8 @@ module Netvisor
 
       element :invoice_number, String, :tag => 'SalesInvoiceNumber'
       element :invoice_date, InvoiceDate, :tag => 'SalesInvoiceDate'
-      element :invoice_due_date, InvoiceDate, :tag => 'salesinvoiceduedate'
       element :invoice_entry_date, InvoiceDate, :tag => 'salesinvoiceeventdate'
+      element :invoice_due_date, InvoiceDate, :tag => 'salesinvoiceduedate'
       element :invoice_delivery_date, InvoiceDate, :tag => 'SalesInvoiceDeliveryDate'
       element :reference_number, String, :tag => 'SalesInvoiceReferenceNumber'
       element :invoice_amount, InvoiceAmount, :tag => 'SalesInvoiceAmount'
