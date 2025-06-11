@@ -1,6 +1,7 @@
 require 'happymapper'
 require 'netvisor/customer'
 require 'netvisor/sales_invoice_line'
+require 'netvisor/float_comma_separated'
 
 module Netvisor
   class Response
@@ -68,7 +69,7 @@ module Netvisor
 
       element :sales_invoice_number, String, :tag => 'SalesInvoiceNumber'
       element :sales_invoice_date, String, :tag => 'SalesInvoiceDate'
-      element :sales_invoice_amount, Float, :tag => 'SalesInvoiceAmount'
+      element :sales_invoice_amount, FloatCommaSeparated, :tag => 'SalesInvoiceAmount', parser: :parse
       element :invoice_status, String, :tag => 'InvoiceStatus'
       element :invoicing_customer_name, String, :tag => 'InvoicingCustomerName'
       element :invoicing_customer_netvisor_key, String, :tag => 'InvoicingCustomerNetvisorKey'
@@ -90,8 +91,8 @@ module Netvisor
         element :customer_code, String, :tag => 'CustomerCode'
         element :customer_name, String, :tag => 'CustomerName'
         element :reference_number, String, :tag => 'ReferenceNumber'
-        element :invoice_sum, Float, :tag => 'InvoiceSum'
-        element :open_sum, Float, :tag => 'OpenSum'
+        element :invoice_sum, FloatCommaSeparated, :tag => 'InvoiceSum', parser: :parse
+        element :open_sum, FloatCommaSeparated, :tag => 'OpenSum', parser: :parse
         element :uri, String, :tag => 'Uri'
       end
 
