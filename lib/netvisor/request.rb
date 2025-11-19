@@ -1,5 +1,6 @@
 require 'net/http'
 require 'uri'
+require 'openssl'
 require 'netvisor/response'
 
 module Netvisor
@@ -57,22 +58,25 @@ module Netvisor
 
     def self.build_headers(url)
       timestamp = DateTime.parse(Time.now.utc.to_s).strftime("%F %T.%L")
+      timestamp_unix = Time.now.utc.to_i.to_s
       transaction_id = DateTime.current.strftime('%Q')
       return {
         'X-Netvisor-Authentication-Sender' => Netvisor.configuration.sender,
         'X-Netvisor-Authentication-CustomerId' => Netvisor.configuration.customer_id,
         'X-Netvisor-Authentication-PartnerId' => Netvisor.configuration.partner_id,
+        'X-Netvisor-Authentication-TimestampUnix' => timestamp_unix,
         'X-Netvisor-Authentication-Timestamp' => timestamp,
-        'X-Netvisor-Authentication-MAC' => build_mac(url, timestamp, transaction_id),
         'X-Netvisor-Authentication-TransactionId' => transaction_id,
         'X-Netvisor-Interface-Language' => Netvisor.configuration.language,
         'X-Netvisor-Organisation-ID' => Netvisor.configuration.organisation_id,
-        'X-Netvisor-Authentication-MACHashCalculationAlgorithm' => 'SHA256'
+        'X-Netvisor-Authentication-MAC' => build_mac(url, timestamp, transaction_id, timestamp_unix),
+        'X-Netvisor-Authentication-MACHashCalculationAlgorithm' => 'HMACSHA256',
+        'X-Netvisor-Authentication-UseHTTPResponseStatusCodes' => '1'
       }
     end
 
-    def self.build_mac(url, timestamp, transaction_id)
-      arr = [
+    def self.build_mac(url, timestamp, transaction_id, timestamp_unix)
+      data = [
         url,
         Netvisor.configuration.sender,
         Netvisor.configuration.customer_id,
@@ -80,11 +84,20 @@ module Netvisor
         Netvisor.configuration.language,
         Netvisor.configuration.organisation_id,
         transaction_id,
+        timestamp_unix,
         Netvisor.configuration.customer_key,
         Netvisor.configuration.partner_key
-      ]
-      Netvisor.logger.debug "build_mac: #{arr.join('&')}"
-      Digest::SHA2.hexdigest(arr.join('&'))
+      ].join('&')
+
+      # Use HMACSHA256 with both customer_key and partner_key as the secret
+      # Reference: https://support.netvisor.fi/en/support/solutions/articles/77000557880-api-authentication#HMACSHA256-authentication
+      hmac_key = [
+        Netvisor.configuration.customer_key,
+        Netvisor.configuration.partner_key
+      ].join('&')
+      Netvisor.logger.debug "build_mac data: #{data}"
+      Netvisor.logger.debug "build_mac key: #{hmac_key}"
+      OpenSSL::HMAC.hexdigest('SHA256', hmac_key, data)
     end
   end
 end
