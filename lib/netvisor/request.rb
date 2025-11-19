@@ -90,9 +90,13 @@ module Netvisor
       ].join('&')
 
       # Use HMACSHA256 with both customer_key and partner_key as the secret
-      # https://support.netvisor.fi/en/support/solutions/articles/77000557880-api-authentication?utm_source=sfmc&utm_medium=email&utm_campaign=Netvisor+FI+ISV-newsletter+11-2025&utm_term=https%3a%2f%2fsupport.netvisor.fi%2fen%2fsupport%2fsolutions%2farticles%2f77000557880-api-authentication&utm_id=231869&sfmc_id=33617352&utm_source=sfmc&utm_term=&utm_content=24806&utm_id=3ac997b6-663d-4745-b7c4-eeb2cfd09490&sfmc_id=33617352&sfmc_activityid=fa4809b8-7dde-4296-8e7a-f57655c238b0&utm_medium=email&sfmc_journey_id=3ac997b6-663d-4745-b7c4-eeb2cfd09490&sfmc_journey_name=eNvtsiroF%20%20ISI%20VDM%205na%20dHS2A65S%20puoptrn%20welsteetr&sfmc_activity_id=fa4809b8-7dde-4296-8e7a-f57655c238b0&sfmc_activity_name=eNvtsiroF%20%20ISI-Venswelttre1%20-10252&sfmc_asset_id=24806&sfmc_channel=email#HMACSHA256-authentication
-      hmac_key = "#{Netvisor.configuration.customer_key}#{Netvisor.configuration.partner_key}"
+      # Reference: https://support.netvisor.fi/en/support/solutions/articles/77000557880-api-authentication#HMACSHA256-authentication
+      hmac_key = [
+        Netvisor.configuration.customer_key,
+        Netvisor.configuration.partner_key
+      ].join('&')
       Netvisor.logger.debug "build_mac data: #{data}"
+      Netvisor.logger.debug "build_mac key: #{hmac_key}"
       OpenSSL::HMAC.hexdigest('SHA256', hmac_key, data)
     end
   end
