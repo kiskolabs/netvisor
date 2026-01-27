@@ -42,7 +42,7 @@ module Netvisor
       response = http.request(request)
 
       unless response.is_a?(Net::HTTPSuccess)
-        raise "Can't connect to Netvisor. Response: #{response.inspect}"
+        raise "Can't connect to Netvisor. Response: #{response.inspect}, Body: #{response.body}"
       end
 
       Netvisor::Response.parse(response.body)
