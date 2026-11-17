@@ -1,6 +1,7 @@
 require 'net/http'
 require 'uri'
 require 'openssl'
+require 'securerandom'
 require 'netvisor/response'
 
 module Netvisor
@@ -59,7 +60,7 @@ module Netvisor
     def self.build_headers(url)
       timestamp = DateTime.parse(Time.now.utc.to_s).strftime("%F %T.%L")
       timestamp_unix = Time.now.utc.to_i.to_s
-      transaction_id = DateTime.current.strftime('%Q')
+      transaction_id = build_transaction_id
       return {
         'X-Netvisor-Authentication-Sender' => Netvisor.configuration.sender,
         'X-Netvisor-Authentication-CustomerId' => Netvisor.configuration.customer_id,
@@ -73,6 +74,12 @@ module Netvisor
         'X-Netvisor-Authentication-MACHashCalculationAlgorithm' => 'HMACSHA256',
         'X-Netvisor-Authentication-UseHTTPResponseStatusCodes' => '1'
       }
+    end
+
+    # Netvisor rejects a reused transaction id (REQUEST_NOT_UNIQUE) and documents
+    # it as a GUID: https://support.netvisor.fi/en/articles/766842-api-authentication
+    def self.build_transaction_id
+      SecureRandom.uuid
     end
 
     def self.build_mac(url, timestamp, transaction_id, timestamp_unix)
